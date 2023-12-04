@@ -1,0 +1,74 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="container" id="user-page-view">
+        <h4 id="title_username">User page</h4>
+
+        <div class="form-control mb-2 w-25 " id="number_follows"></div>
+        <div class="form-control mb-2 w-25" id="number_following"></div>
+
+            <form id="follow_form">
+
+                <input hidden id="follow_form_follower" disabled  type="text" value="{{ request.user.username }}" name="follower">
+                <input hidden id="follow_form_is_followed" disabled  type="text" value="user3" name="is_followed">
+                {% if request.user.username != "" %}
+                <input id="submit_follow" type="submit" class="btn btn-primary mb-3" value="follow">
+                {% endif %}
+            </form>
+
+        <div id="user-page-view-posts"></div>
+
+        <div class="row justify-content-center" class="btn-group" role="group" aria-label="Basic example" >
+        <button class="btn btn-light" id="user_page_previous" >Previous</button>
+        <button class="btn btn-light" id="user_page_page" >Page</button>
+        <button class="btn btn-light" id="user_page_next" >Next</button>
+        </div>
+    </div>
+
+    <div class="container" id="all-posts-view">
+        <h4>All Posts</h4>
+
+        <div class="card-body text-dark bg-white mb-3 rounded-top border border-primary" id="compose_view" >
+            <h5>New post</h5>   
+            <form  id="compose-form">
+                <div class="form-group">
+                    <input hidden disabled class="form-control" id="compose-user" value="{{ request.user }}">
+                </div>
+                <textarea class="form-control" id="compose-body" placeholder="Create your post"></textarea>
+                {% if request.user.username != "" %}
+                <input id="submit_new_post" type="submit" class="btn btn-primary mt-2" value="Create">
+                {% endif %} 
+            </form>
+        </div>
+        <div id ="all_element_view"></div>
+              
+
+        <div class="row justify-content-center" class="btn-group" role="group" aria-label="Basic example" >
+              <button class="btn btn-light" id="previous" >Previous</button>
+              <button class="btn btn-light" id="page" >Page</button>
+              <button class="btn btn-light" id="next" >Next</button>
+        </div>
+
+    </div>
+
+    <div class="container" id="following-view" >
+        <h4>Following</h4>
+        <div  id="filtred_element_view"></div>
+
+        <div class="row justify-content-center" class="btn-group" role="group" aria-label="Basic example" >
+        <button class="btn btn-light" id="following_page_previous" >Previous</button>
+        <button class="btn btn-light" id="following_page_page" >Page</button>
+        <button class="btn btn-light" id="following_page_next" >Next</button>
+        </div>
+
+    </div>
+
+
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
